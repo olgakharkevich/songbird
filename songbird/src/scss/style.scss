@@ -2,6 +2,14 @@
 @import './mixins';
 @import './variables';
 
+html {
+    font-family: 'Conkordia', serif;
+    font-size: 10px;
+    color: $color-text;
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: $color-bg;
+    font-size: 3rem;
 }
