@@ -1,0 +1,29 @@
+@mixin flex ($direction, $justifyContent, $alignItems) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
+}
+
+@mixin scale ($transitionDuration) {
+    transition: $transitionDuration ease;
+    transform: scale(1);
+    z-index: 1;
+    cursor: pointer;
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+@mixin color-scale-active ($color, $transitionDuration) {
+    @include scale($transitionDuration);
+    &:hover {
+        color: $color;
+    }
+    &.active {
+        border: 2px solid $color;
+        transform: scale(1.2);
+        color: $color;
+        z-index: 2;
+    }
+}

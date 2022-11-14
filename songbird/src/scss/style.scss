@@ -2,6 +2,12 @@
 @import './mixins';
 @import './variables';
 
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
 html {
     font-family: 'Conkordia', serif;
     font-size: 10px;
@@ -12,4 +18,71 @@ html {
 body {
     background-color: $color-bg;
     font-size: 3rem;
+    min-height: 100vh;
+    @include flex (column, space-between, stretch);
+}
+
+.container {
+    max-width: $width-desktop;
+    margin: 0 auto;
+    position: relative;
+    padding: 2rem;
+}
+
+@keyframes showBlock {
+    0% {
+        opacity: 0;
+        transform: scale(0.2)
+    }
+
+    40% {
+        opacity: 1;
+        transform: scale(1.02)
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1)
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+nav {
+    @include flex (row, space-around, center);
+    a {
+        text-decoration: none;
+        color: inherit;
+        @include color-scale-active ($color-nav-hover, 0.3s);
+    }
+}
+
+.start-game {
+    @include flex (row, space-around, center);
+    button {
+        width: 30rem;
+        height: 10rem;
+        animation: showBlock 3s ease;
+        cursor: pointer;
+    }
+}
+
+footer {
+	.container {
+		@include flex (row, space-around, center);
+	}
+    .github,
+    .logo-rs-school {
+        img {
+            width: 13.5rem; 
+            height: 5rem;
+            filter: invert(100%);
+        }
+    }
+	.github img {
+        width: 5rem;
+		margin-right: 8.5rem;
+	}
 }
