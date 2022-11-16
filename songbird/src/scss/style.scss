@@ -8,6 +8,12 @@
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+    @include color-scale-active ($color-nav-hover, 0.3s);
+}
+
 html {
     font-family: 'Conkordia', serif;
     font-size: 10px;
@@ -17,7 +23,7 @@ html {
 
 body {
     background-color: $color-bg;
-    font-size: 3rem;
+    font-size: 2.5rem;
     min-height: 100vh;
     @include flex (column, space-between, stretch);
 }
@@ -27,6 +33,15 @@ body {
     margin: 0 auto;
     position: relative;
     padding: 2rem;
+}
+
+section {
+    margin: 1rem 0;
+}
+
+.bg {
+    background-color: $color-bg-section;
+    border-radius: 10px;
 }
 
 @keyframes showBlock {
@@ -52,20 +67,59 @@ body {
 
 nav {
     @include flex (row, space-around, center);
-    a {
-        text-decoration: none;
-        color: inherit;
-        @include color-scale-active ($color-nav-hover, 0.3s);
+    & > div {
+        @include color-scale-active ($color-nav-active, 0.3s);
     }
 }
 
 .start-game {
     @include flex (row, space-around, center);
-    button {
+    a {
         width: 30rem;
         height: 10rem;
+        @include flex (row, center, center);
         animation: showBlock 3s ease;
-        cursor: pointer;
+    }
+}
+
+.quiz {
+    .score {
+        width: fit-content;
+        margin: 0 auto;
+    }
+    .group {
+        @include flex (row, center, center);
+        flex-wrap: wrap;
+        &__item {
+            background-color: $color-bg-group;
+            padding: 0 1rem;
+            border: solid 1px $color-text;
+            &.active {
+                background-color: $color-bg-group-active;
+            }
+        }
+    }
+    .random-bird {
+        @include flex (row, left, center);
+        .image {
+            margin: 2rem;
+            width: 200px;
+            height: 155px;
+            background-image: url('../assets/jpg/random-bird.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            border-radius: 1rem;
+        }
+        .audio {
+            @include flex (column, left, center);
+            .title {
+                font-size: 5rem;
+            }
+            .player {
+                border-top: 1px solid $color-text;
+            }
+        }
     }
 }
 

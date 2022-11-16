@@ -27,3 +27,15 @@
         z-index: 2;
     }
 }
+
+@mixin color-scale-active ($color, $transitionDuration) {
+    @include scale($transitionDuration);
+    &:hover {
+        color: $color;
+    }
+    &.active {
+        transform: scale(1.2);
+        color: $color;
+        z-index: 2;
+    }
+}

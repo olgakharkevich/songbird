@@ -13,7 +13,7 @@
                 <div class="logo">
                     <h1><a href="./index.html">Songbird</a></h1>
                 </div>
-                <div class="quiz">
+                <div class="quiz active">
                     <a href="./quiz.html">quiz</a>
                 </div>
                 <div class="results"> 
@@ -22,9 +22,44 @@
             </nav>
         </div>
     </header>
-    <main>
+    <main class="quiz">
         <div class="container">
-            
+            <section class="score">Score: <span>0</span></section>
+            <section class="group">
+                <div class="group__item active">Разминка</div>
+                <div class="group__item">Воробьиные</div>
+                <div class="group__item">Лесные птицы</div>
+                <div class="group__item">Певчие птицы</div>
+                <div class="group__item">Хищные птицы</div>
+                <div class="group__item">Морские птицы</div>
+            </section>
+            <section class="random-bird bg">
+                <div class="image"></div>
+                <div class="audio">
+                    <div class="title">*****</div>
+                    <div class="player"></div>
+                </div>
+            </section>
+            <section class="answer bg">
+                <div class="birds bg">
+                    <div class="birds__title"><span></span>Воробей</div>
+                    <div class="birds__title"><span></span>Грач</div>
+                    <div class="birds__title"><span></span>Галка</div>
+                    <div class="birds__title"><span></span>Певчий дрозд</div>
+                    <div class="birds__title"><span></span>Сорока</div>
+                    <div class="birds__title"><span></span>Сойка</div>
+                </div>
+                <div class="description bg">
+
+                    <p>Послушайте плеер. <br>
+                        Выберите птицу из списка</p>                   
+                    <!-- <div class="image"></div>
+                    <h3 class="title"></h3>
+                    <h4 class="title-lat"></h4>
+                    <div class="player"></div>
+                    <div class="text"></div> -->
+                </div>
+            </section>
         </div>
     </main>
     <footer>
