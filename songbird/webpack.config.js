@@ -1,6 +1,9 @@
 // npm i webpack webpack-cli webpack-dev-server html-webpack-plugin clean-webpack-plugin --D
 // deploy to gh-pages (also it's necessary check "deploy" script and change folder)
 // npm i -D gh-pages
+// npm i eslint -D
+// npm i prettier -D
+// npm i eslint-config-prettier -D
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
