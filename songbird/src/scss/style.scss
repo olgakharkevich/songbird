@@ -32,7 +32,7 @@ body {
     max-width: $width-desktop;
     margin: 0 auto;
     position: relative;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .bg {
@@ -97,12 +97,12 @@ nav {
             }
         }
     }
-    .random-bird {
+    .random-item {
         @include flex (row, left, center);
         .image {
             width: 200px;
             height: 155px;
-            @include bg-image('../assets/jpg/random-bird.jpg');
+            @include bg-image;
             border-radius: 1rem;
             margin-right: 2rem;
         }
@@ -156,7 +156,7 @@ nav {
         .image {
             width: 200px;
             height: 155px;
-            @include bg-image("https://live.staticflickr.com//65535//49298804222_474cfe8682.jpg");
+            @include bg-image;
             border-radius: 1rem;
         }
         .title__lan {
@@ -169,6 +169,7 @@ nav {
 }
 
 footer {
+    margin-top: auto;
 	.container {
 		@include flex (row, space-around, center);
 	}
