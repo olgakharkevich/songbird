@@ -2,9 +2,11 @@
 /* eslint-disable no-console */
 import '../../scss/style.scss';
 
-// import birdsDataEn from '../../modules/dataEn';
-import dataRu from '../../modules/dataRu';
-import randomItemImg from '../../assets/jpg/random-bird.jpg';
+// import birdsDataEn from '../../data/dataEn';
+import dataRu from '../../data/dataRu';
+
+import renderScore from '../../modules/renderScore';
+import { renderItem, renderStub } from '../../modules/renderStubAndItem';
 
 console.log(dataRu);
 
@@ -17,43 +19,14 @@ const state = {
 
 const answerEl = document.querySelector('.answer .items');
 
-const renderAnswers = (groupNum) => {
+const renderAnswers = (dataObj, groupNum) => {
     answerEl.innerHTML = '';
-    dataRu[groupNum].forEach((item) => {
+    dataObj[groupNum].forEach((item) => {
         answerEl.innerHTML += `<div class="items__title bg"><span></span>${item.name}</div>`;
     });
 };
 
-const scoreEl = document.querySelector('.score span');
-
-const renderScore = (score) => {
-    scoreEl.textContent = score;
-};
-
-const descriptionEl = document.querySelector('.answer .description');
-const randomItemImage = document.querySelector('.random-item .image');
-const randomItemTitle = document.querySelector('.random-item .title');
-
-const renderStub = () => {
-    randomItemImage.style.backgroundImage = `url(${randomItemImg})`;
-    randomItemTitle.innerHTML = '*****';
-    descriptionEl.innerHTML = `
-        <p>Послушайте плеер. <br>
-        Выберите птицу из списка</p>`;
-};
-
-const renderItem = (item) => {
-    descriptionEl.innerHTML = `
-    <div class="image" style="background-image: url(${item.image});"></div>
-    <div class="title">
-        <h3 class="title__lan">${item.name}</h3>
-        <h4 class="title__lat">${item.species}</h4>
-    </div>
-    <div class="player"></div>
-    <div class="text">${item.description}</div>`;
-};
-
-renderAnswers(state.curGroupNum);
+renderAnswers(dataRu, state.curGroupNum);
 renderScore(state.score);
 renderStub();
 
