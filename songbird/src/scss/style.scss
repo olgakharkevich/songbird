@@ -35,12 +35,11 @@ body {
     padding: 2rem;
 }
 
-section {
-    margin: 1rem 0;
-}
-
 .bg {
+    margin: 1rem;
+    padding: 1.5rem;
     background-color: $color-bg-section;
+    border: 0.5px solid $color-nav-hover;
     border-radius: 10px;
 }
 
@@ -102,7 +101,6 @@ nav {
     .random-bird {
         @include flex (row, left, center);
         .image {
-            margin: 2rem;
             width: 200px;
             height: 155px;
             background-image: url('../assets/jpg/random-bird.jpg');
@@ -110,6 +108,7 @@ nav {
             background-size: cover;
             background-position: center;
             border-radius: 1rem;
+            margin-right: 2rem;
         }
         .audio {
             @include flex (column, left, center);
@@ -123,6 +122,39 @@ nav {
     }
 }
 
+.answer {
+    @include flex (row, left, stretch);
+    .birds {
+        width: 50%;
+        &__title {
+            padding: 0.7rem;
+            cursor: pointer;
+            @include bg-color($color-bg-group, 0.3s);
+            &:hover {
+                border: 0.5px solid $color-bg-group;
+            }
+        }
+        span {
+            display: inline-block;
+            width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 50%;
+            background-color: $color-circle-default;
+            margin-right: 1.5rem;
+            transition: 0.1s;
+            &.right {
+                background-color: $color-circle-right;
+            }
+            &.error {
+                background-color: $color-circle-error;
+            }
+        }
+    }
+    .description {
+        width: 50%;
+    }
+}
+
 footer {
 	.container {
 		@include flex (row, space-around, center);
@@ -130,8 +162,8 @@ footer {
     .github,
     .logo-rs-school {
         img {
-            width: 13.5rem; 
-            height: 5rem;
+            width: 12rem; 
+            height: 4rem;
             filter: invert(100%);
         }
     }

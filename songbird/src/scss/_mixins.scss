@@ -15,16 +15,10 @@
     }
 }
 
-@mixin color-scale-active ($color, $transitionDuration) {
-    @include scale($transitionDuration);
+@mixin bg-color ($bg-color, $transitionDuration) {
+    transition: $transitionDuration ease;
     &:hover {
-        color: $color;
-    }
-    &.active {
-        border: 2px solid $color;
-        transform: scale(1.2);
-        color: $color;
-        z-index: 2;
+        background-color: $bg-color;
     }
 }
 
