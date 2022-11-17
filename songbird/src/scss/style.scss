@@ -40,7 +40,7 @@ body {
     padding: 1.5rem;
     background-color: $color-bg-section;
     border: 0.5px solid $color-nav-hover;
-    border-radius: 10px;
+    border-radius: 0.5rem;
 }
 
 @keyframes showBlock {
@@ -88,13 +88,12 @@ nav {
     }
     .group {
         @include flex (row, center, center);
+        gap: 1rem;
         flex-wrap: wrap;
         &__item {
-            background-color: $color-bg-group;
-            padding: 0 1rem;
-            border: solid 1px $color-text;
+            color: $color-nav-hover;
             &.active {
-                background-color: $color-bg-group-active;
+                color: $color-text;
             }
         }
     }
@@ -103,10 +102,7 @@ nav {
         .image {
             width: 200px;
             height: 155px;
-            background-image: url('../assets/jpg/random-bird.jpg');
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
+            @include bg-image('../assets/jpg/random-bird.jpg');
             border-radius: 1rem;
             margin-right: 2rem;
         }
@@ -124,34 +120,51 @@ nav {
 
 .answer {
     @include flex (row, left, stretch);
-    .birds {
+    .items {
         width: 50%;
+        margin: 1rem;
         &__title {
             padding: 0.7rem;
+            margin: 0;
             cursor: pointer;
             @include bg-color($color-bg-group, 0.3s);
             &:hover {
-                border: 0.5px solid $color-bg-group;
+                border-color: $color-bg-group;
             }
-        }
-        span {
-            display: inline-block;
-            width: 1.2rem;
-            height: 1.2rem;
-            border-radius: 50%;
-            background-color: $color-circle-default;
-            margin-right: 1.5rem;
-            transition: 0.1s;
-            &.right {
+            span {
+                display: inline-block;
+                width: 1.2rem;
+                height: 1.2rem;
+                border-radius: 50%;
+                background-color: $color-circle-default;
+                margin-right: 1.5rem;
+                transition: 0.1s;
+            }
+            &.right span {
                 background-color: $color-circle-right;
             }
-            &.error {
+            &.error span {
                 background-color: $color-circle-error;
             }
         }
     }
     .description {
-        width: 50%;
+        width: 70%;
+        @include flex (row, left, stretch);
+        flex-wrap: wrap;
+        gap: 1rem;
+        .image {
+            width: 200px;
+            height: 155px;
+            @include bg-image("https://live.staticflickr.com//65535//49298804222_474cfe8682.jpg");
+            border-radius: 1rem;
+        }
+        .title__lan {
+           border-bottom: 0.5px solid $color-nav-hover;
+        }
+        .text {
+            font-size: 2rem;
+        }
     }
 }
 
