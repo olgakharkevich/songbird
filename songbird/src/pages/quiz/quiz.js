@@ -6,10 +6,12 @@ import '../../scss/style.scss';
 import dataRu from '../../data/dataRu';
 
 import renderScore from '../../modules/renderScore';
-import { renderItem, renderStub } from '../../modules/renderStubAndItem';
+import {
+    renderItem,
+    renderRightAnswer,
+    renderStub,
+} from '../../modules/renderFns';
 import { formatTime, getRandomNum } from '../../modules/helpers';
-
-// console.log(dataRu);
 
 const state = {
     curGroupNum: 0,
@@ -25,7 +27,6 @@ const state = {
 state.curItem = dataRu[state.curGroupNum][getRandomNum(0, 5)];
 
 // TODO: remove duplicate code
-
 const createCurAudio = (audioSrc, section) => {
     const playBtn = document.querySelector(`.${section} .play`);
     const progressEl = document.querySelector(`.${section} .progress`);
@@ -186,6 +187,16 @@ answerEl.addEventListener('click', (event) => {
 
     if (!state.isRightAnswerDone) {
         if (state.curItem.name === answerItemEl.textContent) {
+            renderRightAnswer(state.curItem);
+            state.audioCur.pause();
+            state.isCurPlay = false;
+            state.audioCur.currentTime = 0;
+            document
+                .querySelector('.random-item .play')
+                .classList.remove('pause-image');
+            document
+                .querySelector('.random-item .play')
+                .classList.add('play-image');
             answerItemEl.classList.add('right');
             state.isRightAnswerDone = true;
             state.score += curGroupScore;

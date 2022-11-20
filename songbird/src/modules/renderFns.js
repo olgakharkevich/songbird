@@ -12,6 +12,11 @@ const renderStub = () => {
         Выберите птицу из списка</p>`;
 };
 
+const renderRightAnswer = (item) => {
+    randomItemImage.style.backgroundImage = `url(${item.image})`;
+    randomItemTitle.innerHTML = item.name;
+};
+
 const renderItem = (item) => {
     descriptionEl.innerHTML = `
     <div class="image" style="background-image: url(${item.image});"></div>
@@ -42,4 +47,4 @@ const renderItem = (item) => {
     <div class="text">${item.description}</div>`;
 };
 
-export { renderItem, renderStub };
+export { renderItem, renderRightAnswer, renderStub };
