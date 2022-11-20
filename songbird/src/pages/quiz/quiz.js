@@ -16,13 +16,17 @@ const state = {
     score: 0,
     curItem: {},
     isRightAnswerDone: false,
+    isCurPlay: false,
+    audioCur: null,
+    isAnswerPlay: false,
+    audioAnswer: null,
 };
 
 state.curItem = dataRu[state.curGroupNum][getRandomNum(0, 5)];
 
-let isPlay = false;
+// TODO: remove duplicate code
 
-const createAndRenderAudio = (audioSrc, section) => {
+const createCurAudio = (audioSrc, section) => {
     const playBtn = document.querySelector(`.${section} .play`);
     const progressEl = document.querySelector(`.${section} .progress`);
     const progressContainerEl = document.querySelector(
@@ -36,14 +40,14 @@ const createAndRenderAudio = (audioSrc, section) => {
 
     const playAudio = (audio) => {
         audio.play();
-        isPlay = true;
+        state.isCurPlay = true;
         playBtn.classList.remove('play-image');
         playBtn.classList.add('pause-image');
     };
 
     const pauseAudio = (audio) => {
         audio.pause();
-        isPlay = false;
+        state.isCurPlay = false;
         playBtn.classList.remove('pause-image');
         playBtn.classList.add('play-image');
     };
@@ -56,29 +60,99 @@ const createAndRenderAudio = (audioSrc, section) => {
         curTimeEl.textContent = formatTime(currentTime);
     };
 
-    const audioCur = new Audio(audioSrc);
+    if (!state.audioAnswer) {
+        state.audioCur = new Audio(audioSrc);
+    } else {
+        state.audioCur.src = audioSrc;
+    }
 
-    audioCur.addEventListener('loadeddata', () => {
-        const durationCur = audioCur.duration;
+    state.audioCur.addEventListener('loadeddata', () => {
+        const durationCur = state.audioCur.duration;
         durTimeEl.textContent = formatTime(durationCur);
     });
 
     playBtn.addEventListener('click', () => {
-        if (!isPlay) {
-            playAudio(audioCur);
+        if (!state.isCurPlay) {
+            playAudio(state.audioCur);
         } else {
-            pauseAudio(audioCur);
+            pauseAudio(state.audioCur);
         }
     });
 
-    audioCur.addEventListener('timeupdate', updateProgress);
+    state.audioCur.addEventListener('timeupdate', updateProgress);
 
     const setProgress = (event) => {
         const width = progressContainerEl.clientWidth;
         const clickX = event.offsetX;
-        const { duration } = audioCur;
+        const { duration } = state.audioCur;
         durTimeEl.textContent = formatTime(duration);
-        audioCur.currentTime = (clickX / width) * duration;
+        state.audioCur.currentTime = (clickX / width) * duration;
+    };
+
+    progressContainerEl.addEventListener('click', setProgress);
+};
+
+const createAnswerAudio = (audioSrc, section) => {
+    const playBtn = document.querySelector(`.${section} .play`);
+    const progressEl = document.querySelector(`.${section} .progress`);
+    const progressContainerEl = document.querySelector(
+        `.${section} .progress-container`
+    );
+    const progressCircleEl = document.querySelector(
+        `.${section} .progress-circle`
+    );
+    const curTimeEl = document.querySelector(`.${section} .cur-time`);
+    const durTimeEl = document.querySelector(`.${section} .dur-time`);
+
+    const playAudio = (audio) => {
+        audio.play();
+        state.isAnswerPlay = true;
+        playBtn.classList.remove('play-image');
+        playBtn.classList.add('pause-image');
+    };
+
+    const pauseAudio = (audio) => {
+        audio.pause();
+        state.isAnswerPlay = false;
+        playBtn.classList.remove('pause-image');
+        playBtn.classList.add('play-image');
+    };
+
+    const updateProgress = (event) => {
+        const { duration, currentTime } = event.srcElement;
+        const progressPercent = (currentTime / duration) * 100;
+        progressEl.style.width = `${progressPercent}%`;
+        progressCircleEl.style.left = `${progressPercent}%`;
+        curTimeEl.textContent = formatTime(currentTime);
+    };
+
+    if (!state.audioAnswer) {
+        state.audioAnswer = new Audio(audioSrc);
+    } else {
+        state.audioAnswer.src = audioSrc;
+    }
+
+    state.audioAnswer.addEventListener('loadeddata', () => {
+        const durationCur = state.audioAnswer.duration;
+        durTimeEl.textContent = formatTime(durationCur);
+    });
+
+    playBtn.addEventListener('click', () => {
+        if (!state.isAnswerPlay) {
+            playAudio(state.audioAnswer);
+        } else {
+            pauseAudio(state.audioAnswer);
+        }
+    });
+
+    state.audioAnswer.addEventListener('timeupdate', updateProgress);
+
+    const setProgress = (event) => {
+        const width = progressContainerEl.clientWidth;
+        const clickX = event.offsetX;
+        const { duration } = state.audioAnswer;
+        durTimeEl.textContent = formatTime(duration);
+        state.audioAnswer.currentTime = (clickX / width) * duration;
     };
 
     progressContainerEl.addEventListener('click', setProgress);
@@ -93,7 +167,7 @@ const renderAnswers = (dataObj, groupNum) => {
     });
 };
 
-createAndRenderAudio(state.curItem.audio, 'random-item');
+createCurAudio(state.curItem.audio, 'random-item');
 
 renderAnswers(dataRu, state.curGroupNum);
 renderScore(state.score);
@@ -107,7 +181,8 @@ answerEl.addEventListener('click', (event) => {
         (el) => el.name === answerItemEl.textContent
     );
     renderItem(answerItem);
-    createAndRenderAudio(answerItem.audio, 'answer');
+
+    createAnswerAudio(answerItem.audio, 'answer');
 
     if (!state.isRightAnswerDone) {
         if (state.curItem.name === answerItemEl.textContent) {
