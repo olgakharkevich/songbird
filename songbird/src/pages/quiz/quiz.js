@@ -7,15 +7,81 @@ import dataRu from '../../data/dataRu';
 
 import renderScore from '../../modules/renderScore';
 import { renderItem, renderStub } from '../../modules/renderStubAndItem';
-import { formatTime } from '../../modules/helpers';
+import { formatTime, getRandomNum } from '../../modules/helpers';
 
-console.log(dataRu);
+// console.log(dataRu);
 
 const state = {
     curGroupNum: 0,
     score: 0,
     curItem: {},
     isRightAnswerDone: false,
+};
+
+state.curItem = dataRu[state.curGroupNum][getRandomNum(0, 5)];
+
+let isPlay = false;
+
+const createAndRenderAudio = (audioSrc, section) => {
+    const playBtn = document.querySelector(`.${section} .play`);
+    const progressEl = document.querySelector(`.${section} .progress`);
+    const progressContainerEl = document.querySelector(
+        `.${section} .progress-container`
+    );
+    const progressCircleEl = document.querySelector(
+        `.${section} .progress-circle`
+    );
+    const curTimeEl = document.querySelector(`.${section} .cur-time`);
+    const durTimeEl = document.querySelector(`.${section} .dur-time`);
+
+    const playAudio = (audio) => {
+        audio.play();
+        isPlay = true;
+        playBtn.classList.remove('play-image');
+        playBtn.classList.add('pause-image');
+    };
+
+    const pauseAudio = (audio) => {
+        audio.pause();
+        isPlay = false;
+        playBtn.classList.remove('pause-image');
+        playBtn.classList.add('play-image');
+    };
+
+    const updateProgress = (event) => {
+        const { duration, currentTime } = event.srcElement;
+        const progressPercent = (currentTime / duration) * 100;
+        progressEl.style.width = `${progressPercent}%`;
+        progressCircleEl.style.left = `${progressPercent}%`;
+        curTimeEl.textContent = formatTime(currentTime);
+    };
+
+    const audioCur = new Audio(audioSrc);
+
+    audioCur.addEventListener('loadeddata', () => {
+        const durationCur = audioCur.duration;
+        durTimeEl.textContent = formatTime(durationCur);
+    });
+
+    playBtn.addEventListener('click', () => {
+        if (!isPlay) {
+            playAudio(audioCur);
+        } else {
+            pauseAudio(audioCur);
+        }
+    });
+
+    audioCur.addEventListener('timeupdate', updateProgress);
+
+    const setProgress = (event) => {
+        const width = progressContainerEl.clientWidth;
+        const clickX = event.offsetX;
+        const { duration } = audioCur;
+        durTimeEl.textContent = formatTime(duration);
+        audioCur.currentTime = (clickX / width) * duration;
+    };
+
+    progressContainerEl.addEventListener('click', setProgress);
 };
 
 const answerEl = document.querySelector('.answer .items');
@@ -27,72 +93,11 @@ const renderAnswers = (dataObj, groupNum) => {
     });
 };
 
-const audioSrc = dataRu[0][0].audio;
-const audioCur = new Audio(audioSrc);
-
-const playBtn = document.getElementById('play');
-const progressEl = document.getElementById('progress');
-const progressContainerEl = document.getElementById('progress-container');
-const progressCircleEl = document.getElementById('progress-circle');
-const curTimeEl = document.getElementById('cur-time');
-const durTimeEl = document.getElementById('dur-time');
-
-// TODO: move to function renderAudio;
-audioCur.addEventListener('loadeddata', () => {
-    const durationCur = audioCur.duration;
-    durTimeEl.textContent = formatTime(durationCur);
-});
-
-let isPlay = false;
-
-const playAudio = (audio) => {
-    audio.play();
-    isPlay = true;
-    playBtn.classList.remove('play-image');
-    playBtn.classList.add('pause-image');
-};
-
-const pauseAudio = (audio) => {
-    audio.pause();
-    isPlay = false;
-    playBtn.classList.remove('pause-image');
-    playBtn.classList.add('play-image');
-};
-
-playBtn.addEventListener('click', () => {
-    if (!isPlay) {
-        playAudio(audioCur);
-    } else {
-        pauseAudio(audioCur);
-    }
-});
-
-const updateProgress = (event) => {
-    const { duration, currentTime } = event.srcElement;
-    const progressPercent = (currentTime / duration) * 100;
-    progressEl.style.width = `${progressPercent}%`;
-    progressCircleEl.style.left = `${progressPercent}%`;
-    curTimeEl.textContent = formatTime(currentTime);
-};
-
-audioCur.addEventListener('timeupdate', updateProgress);
-
-const setProgress = (event) => {
-    const width = progressContainerEl.clientWidth;
-    const clickX = event.offsetX;
-    const { duration } = audioCur;
-    console.log(duration);
-    durTimeEl.textContent = formatTime(duration);
-    audioCur.currentTime = (clickX / width) * duration;
-};
-
-progressContainerEl.addEventListener('click', setProgress);
+createAndRenderAudio(state.curItem.audio, 'random-item');
 
 renderAnswers(dataRu, state.curGroupNum);
 renderScore(state.score);
 renderStub();
-
-// state.curItem = dataRu[0][0];
 
 let curGroupScore = 5;
 
@@ -102,6 +107,7 @@ answerEl.addEventListener('click', (event) => {
         (el) => el.name === answerItemEl.textContent
     );
     renderItem(answerItem);
+    createAndRenderAudio(answerItem.audio, 'answer');
 
     if (!state.isRightAnswerDone) {
         if (state.curItem.name === answerItemEl.textContent) {

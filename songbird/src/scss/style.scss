@@ -81,6 +81,72 @@ nav {
     }
 }
 
+.audio {
+    flex-grow: 1;
+    @include flex (column, center, center);
+    &__container {
+        width: 100%;
+    }
+    .title {
+        font-size: 5rem;
+    }
+    .nav-progress {
+        @include flex (row, left, center);
+    }
+    .navigation {
+        .action-btn {
+            width: 25px;
+            height: 25px;
+            border: none;
+            border-radius: 50%;
+            background-repeat: no-repeat;
+            background-color: initial;
+            margin-right: 2rem;
+            @include img-hover(invert(100%));
+        }
+        .play {
+            &.play-image {
+                background-image: url('../assets/svg/play.svg');
+            }
+            &.pause-image {
+                background-image: url('../assets/svg/pause.svg');
+            }
+        }
+    }
+    .progress-container {
+        position: relative;
+        background: $color-text;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 10px 0;
+        height: 4px;
+        width: 100%;
+    }
+    .progress {
+        background-color: $color-nav-active;
+        border-radius: 5px;
+        height: 100%;
+        width: 0%;
+        transition: width 0.1s linear;
+    }
+    .progress-circle {
+        position: absolute;
+        background-color: $color-text;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        top: 0;
+        transform: translate(-50%, calc(-50% + 2px));
+        cursor: pointer;
+    }
+    .duration {
+        font-size: 1.5rem;
+        @include flex (row, space-between, center);
+        margin-left: calc(25px + 2rem);
+        
+    }
+}
+
 .quiz {
     .score {
         width: fit-content;
@@ -105,71 +171,6 @@ nav {
             @include bg-image;
             border-radius: 1rem;
             margin-right: 2rem;
-        }
-        .audio {
-            flex-grow: 1;
-            @include flex (column, center, center);
-            &__container {
-                width: 100%;
-            }
-            .title {
-                font-size: 5rem;
-            }
-            .nav-progress {
-                @include flex (row, left, center);
-            }
-            .navigation {
-                .action-btn {
-                    width: 25px;
-                    height: 25px;
-                    border: none;
-                    border-radius: 50%;
-                    background-repeat: no-repeat;
-                    background-color: initial;
-                    margin-right: 2rem;
-                    @include img-hover(invert(100%));
-                }
-                #play {
-                    &.play-image {
-                        background-image: url('../assets/svg/play.svg');
-                    }
-                    &.pause-image {
-                        background-image: url('../assets/svg/pause.svg');
-                    }
-                }
-            }
-            .progress-container {
-                position: relative;
-				background: $color-text;
-				border-radius: 5px;
-				cursor: pointer;
-				margin: 10px 0;
-				height: 4px;
-				width: 100%;
-			}
-			.progress {
-				background-color: $color-nav-active;
-				border-radius: 5px;
-				height: 100%;
-				width: 0%;
-				transition: width 0.1s linear;
-			}
-            .progress-circle {
-                position: absolute;
-                background-color: $color-text;
-                width: 16px;
-                height: 16px;
-                border-radius: 50%;
-                top: 0;
-                transform: translate(-50%, calc(-50% + 2px));
-                cursor: pointer;
-            }
-            .duration {
-                font-size: 1.5rem;
-                @include flex (row, space-between, center);
-                margin-left: calc(25px + 2rem);
-                
-            }
         }
     }
 }
@@ -215,7 +216,12 @@ nav {
             @include bg-image;
             border-radius: 1rem;
         }
-        .title__lan {
+        .info {
+            @include flex (column, left, stretch);
+            flex-grow: 1;
+        }
+        .title__lan,
+        .title__lat {
            border-bottom: 0.5px solid $color-nav-hover;
         }
         .text {

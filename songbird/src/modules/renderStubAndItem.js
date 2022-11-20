@@ -15,11 +15,30 @@ const renderStub = () => {
 const renderItem = (item) => {
     descriptionEl.innerHTML = `
     <div class="image" style="background-image: url(${item.image});"></div>
-    <div class="title">
+    <div class="info">
         <h3 class="title__lan">${item.name}</h3>
         <h4 class="title__lat">${item.species}</h4>
+        <div class="audio">
+            <div class="audio__container">
+                <div class="title"></div>
+                <div class="player">
+                    <div class="nav-progress">
+                        <div class="navigation">
+                          <div class="play play-image action-btn"></div>
+                        </div>
+                        <div class="progress-container">
+                          <div class="progress"></div>
+                          <div class="progress-circle"></div>
+                        </div>
+                    </div>
+                    <div class="duration">
+                        <div class="cur-time">00:00</div>
+                        <div class="dur-time"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="player"></div>
     <div class="text">${item.description}</div>`;
 };
 
