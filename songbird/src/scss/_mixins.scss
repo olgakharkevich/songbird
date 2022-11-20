@@ -39,3 +39,12 @@
     background-size: cover;
     background-position: center;   
 }
+
+@mixin img-hover ($filter) {
+	filter: $filter;
+	transition: 0.3s ease;
+	&:hover {
+		opacity: 0.5;
+		cursor: pointer;
+	}
+}
