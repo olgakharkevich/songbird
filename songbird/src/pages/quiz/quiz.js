@@ -128,6 +128,11 @@ const createCurAudio = (audioSrc) => {
 
     state.audioCur.addEventListener('timeupdate', updateProgress);
     progressContainerEl.addEventListener('click', setProgress);
+    state.audioCur.addEventListener('ended', () => {
+        activatePlayBtn();
+        state.isCurPlay = false;
+        state.audioCur.currentTime = 0;
+    });
 };
 
 const createAnswerAudio = (audioSrc, section) => {
@@ -190,6 +195,12 @@ const createAnswerAudio = (audioSrc, section) => {
     });
 
     state.audioAnswer.addEventListener('timeupdate', updateProgressAnswer);
+    state.audioAnswer.addEventListener('ended', () => {
+        playBtnAnswer.classList.remove('pause-image');
+        playBtnAnswer.classList.add('play-image');
+        state.isAnswerPlay = false;
+        state.audioAnswer.currentTime = 0;
+    });
 
     const setProgressAnswer = (event) => {
         const width = progressContainerAnswerEl.clientWidth;
