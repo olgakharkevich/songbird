@@ -40,6 +40,12 @@ const renderItem = (item) => {
                         <div class="cur-time">00:00</div>
                         <div class="dur-time"></div>
                     </div>
+                    <div class="volume-container">
+                        <div class="volume volume-min"></div>
+                        <input type="range" min="1" max="100"
+                            value="99" class="volume-slider" >
+                        <div class="volume volume-max"></div>
+                    </div>
                 </div>
             </div>
         </div>

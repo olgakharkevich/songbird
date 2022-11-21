@@ -142,6 +142,12 @@ const createAnswerAudio = (audioSrc, section) => {
     const curTimeAnswerEl = document.querySelector(`.${section} .cur-time`);
     const durTimeAnswerEl = document.querySelector(`.${section} .dur-time`);
 
+    const volumeSliderAnswerEl = document.querySelector(
+        `.${section} .volume-slider`
+    );
+    const volumeMinAnswerEl = document.querySelector(`.${section} .volume-min`);
+    const volumeMaxAnswerEl = document.querySelector(`.${section} .volume-max`);
+
     const playAudioAnswer = (audio) => {
         audio.play();
         state.isAnswerPlay = true;
@@ -194,6 +200,24 @@ const createAnswerAudio = (audioSrc, section) => {
     };
 
     progressContainerAnswerEl.addEventListener('click', setProgressAnswer);
+
+    const setVolumeAnswer = () => {
+        state.audioAnswer.volume = volumeSliderAnswerEl.value / 100;
+    };
+
+    const setMinVolumeAnswer = () => {
+        state.audioAnswer.volume = 0;
+        volumeSliderAnswerEl.value = 0;
+    };
+
+    const setMaxVolumeAnswer = () => {
+        state.audioAnswer.volume = 1;
+        volumeSliderAnswerEl.value = 100;
+    };
+
+    volumeSliderAnswerEl.addEventListener('change', setVolumeAnswer);
+    volumeMinAnswerEl.addEventListener('click', setMinVolumeAnswer);
+    volumeMaxAnswerEl.addEventListener('click', setMaxVolumeAnswer);
 };
 
 const answerEl = document.querySelector('.answer .items');
