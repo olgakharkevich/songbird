@@ -35,6 +35,10 @@ body {
     padding: 1rem;
 }
 
+.hidden {
+    display: none;
+}
+
 .bg {
     margin: 1rem;
     padding: 1.5rem;
@@ -193,7 +197,8 @@ nav {
 
 .btn {
     padding: 0;
-    .next-level {
+    .next-level,
+    .start-game {
         width: 100%;
         text-align: center;
         color: $color-circle-default;
@@ -262,6 +267,22 @@ nav {
         .text {
             font-size: 2rem;
         }
+    }
+}
+
+.results {
+    .container {
+        background-color: $color-bg-group;
+        border: 0.5px solid $color-nav-hover;
+        border-radius: 0.5rem;
+        width: 70%;
+    }
+    .text {
+        @include flex (column, center, center);
+        margin-bottom: 4rem;
+    }
+    & + footer {
+        margin-top: 0;
     }
 }
 

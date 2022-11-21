@@ -213,6 +213,11 @@ const disableBtn = () => {
 };
 
 btnNextLevel.addEventListener('click', () => {
+    if (state.curGroupNum === 5) {
+        localStorage.setItem('scoreOKh', state.score);
+        window.location.href = './results.html';
+        return;
+    }
     disableBtn();
     clearState();
     state.curGroupNum += 1;
