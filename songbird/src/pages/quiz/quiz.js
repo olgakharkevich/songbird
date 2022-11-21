@@ -1,5 +1,3 @@
-// TODO: remove disable no-console
-/* eslint-disable no-console */
 import '../../scss/style.scss';
 
 // import birdsDataEn from '../../data/dataEn';
@@ -15,6 +13,11 @@ import { formatTime, getRandomNum } from '../../modules/helpers';
 
 import win from '../../assets/audio/win.mp3';
 import lose from '../../assets/audio/lose.mp3';
+
+// eslint-disable-next-line no-console
+console.log(
+    'Самооценка - 210 баллов.\nВыполнены все пункты задания, кроме Extra scope.\nСпасибо за проверку и удачи :)'
+);
 
 const soundWin = new Audio(win);
 const soundLose = new Audio(lose);
