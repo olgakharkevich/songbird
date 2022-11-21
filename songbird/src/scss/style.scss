@@ -124,6 +124,11 @@ nav {
             font-size: 5rem;
             @include flex (row, center, center);
             animation: showBlock 3s ease;
+            color: $color-nav-hover;
+            &:hover {
+                color: $color-text;
+                text-decoration: underline;
+            }
         }
     }
     & + footer {
