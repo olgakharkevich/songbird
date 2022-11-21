@@ -19,6 +19,14 @@ html {
     font-size: 11px;
     color: $color-text;
     scroll-behavior: smooth;
+
+    @media screen and (max-width: ($width-tablet-medium - 1px)) {
+        font-size: 9px;
+    }
+
+    @media screen and (max-width: ($width-mobile-max - 1px)) {
+        font-size: 7px;
+    }
 }
 
 body {
@@ -84,6 +92,22 @@ nav {
         height: 55px;
         background-image: url('../assets/svg/logo.svg');
         @include bg-image;
+        
+        @media screen and (max-width: ($width-tablet-medium - 1px)) {
+            width: 150px;
+            height: 40px;
+        }
+        
+        @media screen and (max-width: $width-mobile-max) {
+            width: 100px;
+            height: 30px;
+        }
+
+        @media screen and (max-width: ($width-mobile-medium - 1px)) {
+            width: 70px;
+            height: 20px;
+        }
+
         a {
             display: block;
             height: inherit;
@@ -192,12 +216,28 @@ nav {
     }
     .random-item {
         @include flex (row, left, stretch);
+
+        @media screen and (max-width: ($width-mobile-max - 1px)) {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
         .image {
             width: 200px;
             height: 155px;
             @include bg-image;
             border-radius: 1rem;
             margin-right: 2rem;
+
+            @media screen and (max-width: ($width-tablet-max - 1px)) {
+                width: 170px;
+                height: 130px;
+            }
+
+            @media screen and (max-width: ($width-mobile-max - 1px)) {
+                align-self: center;
+            }
+
         }
     }
 }
@@ -225,9 +265,19 @@ nav {
 
 .answer {
     @include flex (row, left, stretch);
+
+    @media screen and (max-width: ($width-tablet-min - 1px)) {
+        flex-direction: column;
+    }
+
     .items {
         width: 50%;
         margin: 1rem;
+
+        @media screen and (max-width: ($width-tablet-min - 1px)) {
+            width: auto;
+        }
+        
         &__title {
             padding: 0.7rem;
             margin: 0;
@@ -258,11 +308,30 @@ nav {
         @include flex (row, left, stretch);
         flex-wrap: wrap;
         gap: 1rem;
+
+        @media screen and (max-width: ($width-tablet-min - 1px)) {
+            width: auto;
+        }
+
+        @media screen and (max-width: ($width-mobile-max - 1px)) {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
         .image {
             width: 200px;
             height: 155px;
             @include bg-image;
             border-radius: 1rem;
+
+            @media screen and (max-width: ($width-tablet-max - 1px)) {
+                width: 170px;
+                height: 130px;
+            }
+
+            @media screen and (max-width: ($width-mobile-max - 1px)) {
+                align-self: center;
+            }
         }
         .info {
             @include flex (column, left, stretch);
@@ -289,6 +358,9 @@ nav {
     .text {
         @include flex (column, center, center);
         margin-bottom: 4rem;
+        h2 {
+            margin-bottom: 1rem;
+        }
     }
     & + footer {
         margin-top: 0;
@@ -310,6 +382,6 @@ footer {
     }
 	.github img {
         width: 5rem;
-		margin-right: 8.5rem;
+		margin-right: 7rem;
 	}
 }
