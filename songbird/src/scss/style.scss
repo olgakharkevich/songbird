@@ -15,8 +15,8 @@ a {
 }
 
 html {
-    font-family: 'Conkordia', serif;
-    font-size: 10px;
+    font-family: 'YanoneKaffeesatz-Regular', sans-serif;
+    font-size: 11px;
     color: $color-text;
     scroll-behavior: smooth;
 }
@@ -70,8 +70,14 @@ body {
 
 nav {
     @include flex (row, space-around, center);
+    margin-bottom: 1rem;
     & > div {
-        @include color-scale-active ($color-nav-active, 0.3s);
+        color: $color-nav-hover;
+        @include color-scale-active ($color-text, 0.3s);
+        &:hover,
+        &.active {
+            text-decoration: underline;
+        }
     }
     .logo {
         width: 200px;
@@ -108,7 +114,7 @@ nav {
         width: 100%;
     }
     .title {
-        font-size: 5rem;
+        font-size: 4rem;
     }
     .nav-progress {
         @include flex (row, left, center);
@@ -180,6 +186,7 @@ nav {
             color: $color-nav-hover;
             &.active {
                 color: $color-text;
+                text-decoration: underline;
             }
         }
     }
@@ -200,6 +207,7 @@ nav {
     .next-level,
     .start-game {
         width: 100%;
+        padding: 0.5rem;
         text-align: center;
         color: $color-circle-default;
         border-radius: inherit;
@@ -262,7 +270,8 @@ nav {
         }
         .title__lan,
         .title__lat {
-           border-bottom: 0.5px solid $color-nav-hover;
+            padding: 0.5rem 0;
+            border-bottom: 0.5px solid $color-nav-hover;
         }
         .text {
             font-size: 2rem;

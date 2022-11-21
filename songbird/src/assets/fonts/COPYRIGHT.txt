@@ -1,1 +1,0 @@
-Copyright (c) Ivan Zeifert and A.Gophmann, 2007. All rights reserved.
