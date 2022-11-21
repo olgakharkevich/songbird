@@ -277,7 +277,7 @@ nav {
         @media screen and (max-width: ($width-tablet-min - 1px)) {
             width: auto;
         }
-        
+
         &__title {
             padding: 0.7rem;
             margin: 0;
@@ -374,14 +374,21 @@ footer {
 	}
     .github,
     .logo-rs-school {
-        img {
-            width: 12rem; 
-            height: 4rem;
-            filter: invert(100%);
+        @include bg-image;
+        a {
+            display: block;
+            height: inherit;
         }
     }
-	.github img {
+    .logo-rs-school {
+        width: 11rem; 
+        height: 4rem;
+        background-image: url('../assets/svg/logo-rs-school.svg');
+    }
+	.github {
         width: 5rem;
-		margin-right: 7rem;
+        height: 6rem;
+		margin-right: calc(11rem - 5rem);
+        background-image: url('../assets/svg/icon-github.svg');
 	}
 }
