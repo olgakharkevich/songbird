@@ -45,6 +45,10 @@ const progressCircleEl = document.querySelector(
 const curTimeEl = document.querySelector('.random-item .cur-time');
 const durTimeEl = document.querySelector('.random-item .dur-time');
 
+const volumeSliderEl = document.querySelector('.random-item .volume-slider');
+const volumeMinEl = document.querySelector('.random-item .volume-min');
+const volumeMaxEl = document.querySelector('.random-item .volume-max');
+
 const activatePlayBtn = () => {
     playBtn.classList.remove('pause-image');
     playBtn.classList.add('play-image');
@@ -90,6 +94,24 @@ const setProgress = (event) => {
     durTimeEl.textContent = formatTime(duration);
     state.audioCur.currentTime = (clickX / width) * duration;
 };
+
+const setVolume = () => {
+    state.audioCur.volume = volumeSliderEl.value / 100;
+};
+
+const setMinVolume = () => {
+    state.audioCur.volume = 0;
+    volumeSliderEl.value = 0;
+};
+
+const setMaxVolume = () => {
+    state.audioCur.volume = 1;
+    volumeSliderEl.value = 100;
+};
+
+volumeSliderEl.addEventListener('change', setVolume);
+volumeMinEl.addEventListener('click', setMinVolume);
+volumeMaxEl.addEventListener('click', setMaxVolume);
 
 // TODO: remove duplicate code
 const createCurAudio = (audioSrc) => {

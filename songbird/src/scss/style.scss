@@ -195,6 +195,45 @@ nav {
         margin-left: calc(25px + 2rem);
         
     }
+    .volume-container {
+        @include flex (row, center, center);
+      }
+    .volume {
+        width: 23px;
+        height: 23px;
+        margin: 0 1rem;
+        @include img-hover(invert(100%));
+        @include bg-image;
+
+        @media screen and (max-width: $width-tablet-min) {
+            margin: 0.5rem;
+        }
+
+        &-min {
+            background-image: url('../assets/svg/volume-min.svg');
+        }
+        &-max {
+            background-image: url('../assets/svg/volume-max.svg');
+        }
+        &-slider {
+            appearance: none;
+            height: 4px;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            border-radius: 5px;
+            &::-webkit-slider-thumb {
+                appearance: none;
+                width: 15px;
+                height: 15px;
+                background: white;
+                cursor: pointer;
+                border-radius: 50%;
+            }
+            &:hover {
+                opacity: 1.0;
+            }
+        }
+    }
 }
 
 .quiz {
