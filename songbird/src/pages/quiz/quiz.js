@@ -26,6 +26,8 @@ const state = {
 
 state.curItem = dataRu[state.curGroupNum][getRandomNum(0, 5)];
 
+const groupItems = document.querySelectorAll('.quiz .group__item');
+
 const playBtn = document.querySelector('.random-item .play');
 const progressEl = document.querySelector('.random-item .progress');
 const progressContainerEl = document.querySelector(
@@ -212,6 +214,10 @@ btnNextLevel.addEventListener('click', () => {
     createCurAudio(state.curItem.audio, 'random-item');
     renderAnswers(dataRu, state.curGroupNum);
     renderStub();
+    groupItems.forEach((item) => {
+        item.classList.remove('active');
+    });
+    groupItems[state.curGroupNum].classList.add('active');
 });
 
 let curGroupScore = 5;
