@@ -175,6 +175,25 @@ nav {
     }
 }
 
+.btn {
+    padding: 0;
+    .next-level {
+        width: 100%;
+        text-align: center;
+        color: $color-circle-default;
+        border-radius: inherit;
+        &.active {
+            cursor: pointer;
+            background-color: $color-bg-group-active;
+            color: $color-text;
+            @include bg-color ($color-nav-hover, 0.3s);
+            &:hover {
+                scale: 1.01;
+            }
+        }
+    }
+}
+
 .answer {
     @include flex (row, left, stretch);
     .items {
