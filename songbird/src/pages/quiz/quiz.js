@@ -13,6 +13,12 @@ import {
 } from '../../modules/renderFns';
 import { formatTime, getRandomNum } from '../../modules/helpers';
 
+import win from '../../assets/audio/win.mp3';
+import lose from '../../assets/audio/lose.mp3';
+
+const soundWin = new Audio(win);
+const soundLose = new Audio(lose);
+
 const state = {
     curGroupNum: 0,
     score: 0,
@@ -240,12 +246,14 @@ answerEl.addEventListener('click', (event) => {
             state.isCurPlay = false;
             activatePlayBtn();
             answerItemEl.classList.add('right');
+            soundWin.play();
             state.isRightAnswerDone = true;
             state.score += curGroupScore;
             renderScore(state.score);
             curGroupScore = 5;
         } else {
             answerItemEl.classList.add('error');
+            soundLose.play();
             curGroupScore -= 1;
         }
     }
