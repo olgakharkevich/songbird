@@ -69,15 +69,31 @@ nav {
     & > div {
         @include color-scale-active ($color-nav-active, 0.3s);
     }
+    .logo {
+        width: 200px;
+        height: 55px;
+        background-image: url('../assets/svg/logo.svg');
+        @include bg-image;
+        a {
+            display: block;
+            height: inherit;
+        }
+    }
 }
 
-.start-game {
-    @include flex (row, space-around, center);
-    a {
-        width: 30rem;
-        height: 10rem;
-        @include flex (row, center, center);
-        animation: showBlock 3s ease;
+.index {
+    .start-game {
+        @include flex (row, space-around, center);
+        a {
+            width: 30rem;
+            height: 10rem;
+            font-size: 5rem;
+            @include flex (row, center, center);
+            animation: showBlock 3s ease;
+        }
+    }
+    & + footer {
+        margin-top: 0;
     }
 }
 
