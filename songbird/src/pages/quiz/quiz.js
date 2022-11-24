@@ -257,8 +257,10 @@ const clearState = () => {
     state.audioCur.currentTime = 0;
     state.audioCur = null;
     state.isAnswerPlay = false;
-    state.audioAnswer.pause();
-    state.audioAnswer = null;
+    if (state.audioAnswer) {
+        state.audioAnswer.pause();
+        state.audioAnswer = null;
+    }
     activatePlayBtn();
 };
 
@@ -273,6 +275,8 @@ const disableBtn = () => {
 };
 
 btnNextLevel.addEventListener('click', () => {
+    if (!btnNextLevel.classList.contains('active')) return;
+
     if (state.curGroupNum === 5) {
         localStorage.setItem('scoreOKh', state.score);
         window.location.href = './results.html';
@@ -295,6 +299,7 @@ let curGroupScore = 5;
 
 answerEl.addEventListener('click', (event) => {
     const answerItemEl = event.target.closest('div');
+    if (!answerItemEl.classList.contains('items__title')) return;
     const answerItem = dataRu[state.curGroupNum].find(
         (el) => el.name === answerItemEl.textContent
     );
